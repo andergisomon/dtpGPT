@@ -37,21 +37,3 @@
   * `--max_new_tokens=10`
 * start each output example with:
   * `--start="to be"`
-
-**Full Colab Code:**
-```
-  # download repo
-  !git clone https://github.com/karpathy/nanoGPT.git
-  
-  # install dependencies
-  pip install tiktoken transformers
-  
-  # download shakespeare dataset into ./data/shakespeare
-  !cd ./nanoGPT/data/shakespeare/ && python prepare.py
-  
-  # finetune gpt-medium with "smaller Transformer" on GPU, model in ./out. (300 iters seems to have lowest val loss) 
-  !cd ./nanoGPT/ && python train.py --dataset=shakespeare --n_layer=4 --n_head=4 --n_embd=64 --compile=False --block_size=64 --batch_size=8 --init_from=gpt2-medium --dtype=float16 --eval_interval=100 --eval_iters=100 --max_iters=300 --bias=True
-  
-  # print 5 samples, with 10 tokens, starting with "to be"
-  !cd ./nanoGPT && python sample.py --dtype=float16 --num_samples=5 --max_new_tokens=10 --start="to be"
-```
